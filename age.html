@@ -32,9 +32,15 @@
 
 <p id="birthDisplay"></p>
 <p id="result"></p>
+<p id="kazoedoshiResult"></p>
 <p id="subResult"></p>
 <p id="etoResult"></p>
+<p id="weekdayResult"></p>
+<p id="zodiacResult"></p>
+<p id="schoolGradeResult"></p>
+<p id="daysLivedResult"></p>
 <p id="nextBirthdayResult"></p>
+<p id="kanrekiResult"></p>
 
 <script>
 function getEto(year) {
@@ -66,6 +72,27 @@ function formatDateJP(date) {
   return y + "年" + m + "月" + d + "日";
 }
 
+function getWeekday(date) {
+  const weekdays = ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"];
+  return weekdays[date.getDay()];
+}
+
+function getZodiac(month, day) {
+  if ((month == 3 && day >= 21) || (month == 4 && day <= 19)) return "牡羊座";
+  if ((month == 4 && day >= 20) || (month == 5 && day <= 20)) return "牡牛座";
+  if ((month == 5 && day >= 21) || (month == 6 && day <= 21)) return "双子座";
+  if ((month == 6 && day >= 22) || (month == 7 && day <= 22)) return "蟹座";
+  if ((month == 7 && day >= 23) || (month == 8 && day <= 22)) return "獅子座";
+  if ((month == 8 && day >= 23) || (month == 9 && day <= 22)) return "乙女座";
+  if ((month == 9 && day >= 23) || (month == 10 && day <= 23)) return "天秤座";
+  if ((month == 10 && day >= 24) || (month == 11 && day <= 22)) return "蠍座";
+  if ((month == 11 && day >= 23) || (month == 12 && day <= 21)) return "射手座";
+  if ((month == 12 && day >= 22) || (month == 1 && day <= 19)) return "山羊座";
+  if ((month == 1 && day >= 20) || (month == 2 && day <= 18)) return "水瓶座";
+  if ((month == 2 && day >= 19) || (month == 3 && day <= 20)) return "魚座";
+  return "";
+}
+
 function calcNextBirthdayDays(birthMonth, birthDay) {
   const today = new Date();
   const todayOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
@@ -77,9 +104,63 @@ function calcNextBirthdayDays(birthMonth, birthDay) {
   }
 
   const diffTime = nextBirthday - todayOnly;
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+}
 
-  return diffDays;
+function calcDaysLived(birth) {
+  const today = new Date();
+  const todayOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const birthOnly = new Date(birth.getFullYear(), birth.getMonth(), birth.getDate());
+  const diffTime = todayOnly - birthOnly;
+  return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+}
+
+function calcKazoeDoshi(birthYear) {
+  const today = new Date();
+  return today.getFullYear() - birthYear + 1;
+}
+
+function getSchoolGrade(birthYear, birthMonth, birthDay) {
+  const today = new Date();
+  const currentYear = today.getFullYear();
+  const isBeforeSchoolStart = (birthMonth < 4) || (birthMonth === 4 && birthDay === 1);
+  const schoolYearBase = isBeforeSchoolStart ? birthYear : birthYear + 1;
+  const ageForGrade = currentYear - schoolYearBase;
+
+  if (ageForGrade < 0) return "未就学";
+  if (ageForGrade === 0) return "0歳児";
+  if (ageForGrade === 1) return "1歳児";
+  if (ageForGrade === 2) return "2歳児";
+  if (ageForGrade === 3) return "年少";
+  if (ageForGrade === 4) return "年中";
+  if (ageForGrade === 5) return "年長";
+  if (ageForGrade >= 6 && ageForGrade <= 11) return "小学校" + (ageForGrade - 5) + "年生";
+  if (ageForGrade >= 12 && ageForGrade <= 14) return "中学校" + (ageForGrade - 11) + "年生";
+  if (ageForGrade >= 15 && ageForGrade <= 17) return "高校" + (ageForGrade - 14) + "年生";
+  if (ageForGrade >= 18 && ageForGrade <= 21) return "大学" + (ageForGrade - 17) + "年生（目安）";
+  return "学校年齢対象外";
+}
+
+function calcKanrekiDays(birthYear, birthMonth, birthDay) {
+  const today = new Date();
+  const todayOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const kanrekiDate = new Date(birthYear + 60, birthMonth - 1, birthDay);
+  const diffTime = kanrekiDate - todayOnly;
+  return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+}
+
+function clearResults(message) {
+  document.getElementById("birthDisplay").innerText = "";
+  document.getElementById("result").innerText = message || "";
+  document.getElementById("kazoedoshiResult").innerText = "";
+  document.getElementById("subResult").innerText = "";
+  document.getElementById("etoResult").innerText = "";
+  document.getElementById("weekdayResult").innerText = "";
+  document.getElementById("zodiacResult").innerText = "";
+  document.getElementById("schoolGradeResult").innerText = "";
+  document.getElementById("daysLivedResult").innerText = "";
+  document.getElementById("nextBirthdayResult").innerText = "";
+  document.getElementById("kanrekiResult").innerText = "";
 }
 
 function calcAge() {
@@ -108,11 +189,17 @@ function calcAge() {
     birth = new Date(birthYear, birthMonth - 1, birthDay);
     inputType = "wareki";
   } else {
-    document.getElementById("birthDisplay").innerText = "";
-    document.getElementById("result").innerText = "西暦または和暦で生年月日を入力してください。";
-    document.getElementById("subResult").innerText = "";
-    document.getElementById("etoResult").innerText = "";
-    document.getElementById("nextBirthdayResult").innerText = "";
+    clearResults("西暦または和暦で生年月日を入力してください。");
+    return;
+  }
+
+  if (
+    isNaN(birth.getTime()) ||
+    birth.getFullYear() !== birthYear ||
+    birth.getMonth() + 1 !== birthMonth ||
+    birth.getDate() !== birthDay
+  ) {
+    clearResults("正しい生年月日を入力してください。");
     return;
   }
 
@@ -128,7 +215,11 @@ function calcAge() {
     "入力した誕生日は " + formatDateJP(birth) + " です";
 
   document.getElementById("result").innerText =
-    "あなたの年齢は " + age + " 歳です";
+    "あなたの満年齢は " + age + " 歳です";
+
+  const kazoeDoshi = calcKazoeDoshi(birthYear);
+  document.getElementById("kazoedoshiResult").innerText =
+    "数え年は " + kazoeDoshi + " 歳です";
 
   if (inputType === "seireki") {
     document.getElementById("subResult").innerText =
@@ -141,14 +232,38 @@ function calcAge() {
   document.getElementById("etoResult").innerText =
     "干支は「" + getEto(birthYear) + "」です";
 
-  const nextBirthdayDays = calcNextBirthdayDays(birthMonth, birthDay);
+  document.getElementById("weekdayResult").innerText =
+    "生まれた曜日は " + getWeekday(birth) + " です";
 
+  document.getElementById("zodiacResult").innerText =
+    "星座は " + getZodiac(birthMonth, birthDay) + " です";
+
+  document.getElementById("schoolGradeResult").innerText =
+    "学年の目安は " + getSchoolGrade(birthYear, birthMonth, birthDay) + " です";
+
+  const daysLived = calcDaysLived(birth);
+  document.getElementById("daysLivedResult").innerText =
+    "生まれてから " + daysLived.toLocaleString() + " 日です";
+
+  const nextBirthdayDays = calcNextBirthdayDays(birthMonth, birthDay);
   if (nextBirthdayDays === 0) {
     document.getElementById("nextBirthdayResult").innerText =
       "今日はお誕生日です！おめでとうございます。";
   } else {
     document.getElementById("nextBirthdayResult").innerText =
       "次の誕生日まであと " + nextBirthdayDays + " 日です";
+  }
+
+  const kanrekiDays = calcKanrekiDays(birthYear, birthMonth, birthDay);
+  if (kanrekiDays > 0) {
+    document.getElementById("kanrekiResult").innerText =
+      "還暦まであと " + kanrekiDays.toLocaleString() + " 日です";
+  } else if (kanrekiDays === 0) {
+    document.getElementById("kanrekiResult").innerText =
+      "今日は還暦のお誕生日です。おめでとうございます。";
+  } else {
+    document.getElementById("kanrekiResult").innerText =
+      "還暦を迎えてから " + Math.abs(kanrekiDays).toLocaleString() + " 日経っています";
   }
 }
 </script>
