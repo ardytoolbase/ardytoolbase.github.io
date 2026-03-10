@@ -28,9 +28,13 @@
 <br><br>
 <button onclick="calcAge()">計算</button>
 
+<hr>
+
+<p id="birthDisplay"></p>
 <p id="result"></p>
 <p id="subResult"></p>
 <p id="etoResult"></p>
+<p id="nextBirthdayResult"></p>
 
 <script>
 function getEto(year) {
@@ -55,9 +59,34 @@ function warekiToSeireki(era, year) {
   return null;
 }
 
+function formatDateJP(date) {
+  const y = date.getFullYear();
+  const m = date.getMonth() + 1;
+  const d = date.getDate();
+  return y + "年" + m + "月" + d + "日";
+}
+
+function calcNextBirthdayDays(birthMonth, birthDay) {
+  const today = new Date();
+  const todayOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+  let nextBirthday = new Date(today.getFullYear(), birthMonth - 1, birthDay);
+
+  if (nextBirthday < todayOnly) {
+    nextBirthday = new Date(today.getFullYear() + 1, birthMonth - 1, birthDay);
+  }
+
+  const diffTime = nextBirthday - todayOnly;
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  return diffDays;
+}
+
 function calcAge() {
   let birth;
   let birthYear;
+  let birthMonth;
+  let birthDay;
   let inputType = "";
 
   const birthInput = document.getElementById("birth").value;
@@ -69,15 +98,21 @@ function calcAge() {
   if (birthInput) {
     birth = new Date(birthInput);
     birthYear = birth.getFullYear();
+    birthMonth = birth.getMonth() + 1;
+    birthDay = birth.getDate();
     inputType = "seireki";
   } else if (wareki && warekiYear && warekiMonth && warekiDay) {
     birthYear = warekiToSeireki(wareki, warekiYear);
-    birth = new Date(birthYear, warekiMonth - 1, warekiDay);
+    birthMonth = warekiMonth;
+    birthDay = warekiDay;
+    birth = new Date(birthYear, birthMonth - 1, birthDay);
     inputType = "wareki";
   } else {
+    document.getElementById("birthDisplay").innerText = "";
     document.getElementById("result").innerText = "西暦または和暦で生年月日を入力してください。";
     document.getElementById("subResult").innerText = "";
     document.getElementById("etoResult").innerText = "";
+    document.getElementById("nextBirthdayResult").innerText = "";
     return;
   }
 
@@ -89,18 +124,32 @@ function calcAge() {
     age--;
   }
 
-  document.getElementById("result").innerText = "あなたの年齢は " + age + " 歳です";
+  document.getElementById("birthDisplay").innerText =
+    "入力した誕生日は " + formatDateJP(birth) + " です";
+
+  document.getElementById("result").innerText =
+    "あなたの年齢は " + age + " 歳です";
 
   if (inputType === "seireki") {
     document.getElementById("subResult").innerText =
-      "昭和・平成・令和表記では " + toWareki(birthYear) + " 生まれです";
+      "和暦では " + toWareki(birthYear) + " 生まれです";
   } else {
     document.getElementById("subResult").innerText =
-      "西暦では " + birthYear + " 年生まれです";
+      "西暦では " + birthYear + "年生まれです";
   }
 
   document.getElementById("etoResult").innerText =
     "干支は「" + getEto(birthYear) + "」です";
+
+  const nextBirthdayDays = calcNextBirthdayDays(birthMonth, birthDay);
+
+  if (nextBirthdayDays === 0) {
+    document.getElementById("nextBirthdayResult").innerText =
+      "今日はお誕生日です！おめでとうございます。";
+  } else {
+    document.getElementById("nextBirthdayResult").innerText =
+      "次の誕生日まであと " + nextBirthdayDays + " 日です";
+  }
 }
 </script>
 
