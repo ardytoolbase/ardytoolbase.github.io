@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>年齢計算ツール | ARDY TOOLBASE</title>
+</head>
+
+<body>
+
+<h1>年齢計算ツール</h1>
+
+<p>生年月日を入力してください</p>
+
+<input type="date" id="birth">
+<button onclick="calcAge()">計算</button>
+
+<p id="result"></p>
+
+<script>
+function calcAge(){
+  const birth = new Date(document.getElementById("birth").value);
+  const today = new Date();
+
+  let age = today.getFullYear() - birth.getFullYear();
+
+  const m = today.getMonth() - birth.getMonth();
+  if(m < 0 || (m === 0 && today.getDate() < birth.getDate())){
+    age--;
+  }
+
+  document.getElementById("result").innerText =
+  "あなたの年齢は " + age + " 歳です";
+}
+</script>
+
+</body>
+</html>
