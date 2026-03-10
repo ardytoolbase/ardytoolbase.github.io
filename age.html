@@ -11,25 +11,96 @@
 
 <p>生年月日を入力してください</p>
 
+<h2>西暦で入力</h2>
 <input type="date" id="birth">
+
+<h2>和暦で入力</h2>
+<select id="wareki">
+  <option value="">選択してください</option>
+  <option value="reiwa">令和</option>
+  <option value="heisei">平成</option>
+  <option value="showa">昭和</option>
+</select>
+<input type="number" id="warekiYear" placeholder="年" min="1">
+<input type="number" id="warekiMonth" placeholder="月" min="1" max="12">
+<input type="number" id="warekiDay" placeholder="日" min="1" max="31">
+
+<br><br>
 <button onclick="calcAge()">計算</button>
 
 <p id="result"></p>
+<p id="subResult"></p>
+<p id="etoResult"></p>
 
 <script>
-function calcAge(){
-  const birth = new Date(document.getElementById("birth").value);
-  const today = new Date();
+function getEto(year) {
+  const etoList = ["申", "酉", "戌", "亥", "子", "丑", "寅", "卯", "辰", "巳", "午", "未"];
+  return etoList[year % 12];
+}
 
+function toWareki(year) {
+  if (year >= 2019) {
+    return "令和" + (year - 2018) + "年";
+  } else if (year >= 1989) {
+    return "平成" + (year - 1988) + "年";
+  } else {
+    return "昭和" + (year - 1925) + "年";
+  }
+}
+
+function warekiToSeireki(era, year) {
+  if (era === "reiwa") return 2018 + year;
+  if (era === "heisei") return 1988 + year;
+  if (era === "showa") return 1925 + year;
+  return null;
+}
+
+function calcAge() {
+  let birth;
+  let birthYear;
+  let inputType = "";
+
+  const birthInput = document.getElementById("birth").value;
+  const wareki = document.getElementById("wareki").value;
+  const warekiYear = parseInt(document.getElementById("warekiYear").value);
+  const warekiMonth = parseInt(document.getElementById("warekiMonth").value);
+  const warekiDay = parseInt(document.getElementById("warekiDay").value);
+
+  if (birthInput) {
+    birth = new Date(birthInput);
+    birthYear = birth.getFullYear();
+    inputType = "seireki";
+  } else if (wareki && warekiYear && warekiMonth && warekiDay) {
+    birthYear = warekiToSeireki(wareki, warekiYear);
+    birth = new Date(birthYear, warekiMonth - 1, warekiDay);
+    inputType = "wareki";
+  } else {
+    document.getElementById("result").innerText = "西暦または和暦で生年月日を入力してください。";
+    document.getElementById("subResult").innerText = "";
+    document.getElementById("etoResult").innerText = "";
+    return;
+  }
+
+  const today = new Date();
   let age = today.getFullYear() - birth.getFullYear();
 
   const m = today.getMonth() - birth.getMonth();
-  if(m < 0 || (m === 0 && today.getDate() < birth.getDate())){
+  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
     age--;
   }
 
-  document.getElementById("result").innerText =
-  "あなたの年齢は " + age + " 歳です";
+  document.getElementById("result").innerText = "あなたの年齢は " + age + " 歳です";
+
+  if (inputType === "seireki") {
+    document.getElementById("subResult").innerText =
+      "昭和・平成・令和表記では " + toWareki(birthYear) + " 生まれです";
+  } else {
+    document.getElementById("subResult").innerText =
+      "西暦では " + birthYear + " 年生まれです";
+  }
+
+  document.getElementById("etoResult").innerText =
+    "干支は「" + getEto(birthYear) + "」です";
 }
 </script>
 
