@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>日数計算 | ARDY TOOLBASE</title>
+</head>
+
+<body>
+
+<h1>日数計算ツール</h1>
+
+<p>2つの日付の差を計算します</p>
+
+開始日：
+<input type="date" id="startDate">
+
+終了日：
+<input type="date" id="endDate">
+
+<button onclick="calcDays()">計算</button>
+
+<p id="result"></p>
+
+<script>
+
+function calcDays(){
+
+let start = new Date(document.getElementById("startDate").value);
+
+let end = new Date(document.getElementById("endDate").value);
+
+let diff = end - start;
+
+let days = diff / (1000 * 60 * 60 * 24);
+
+document.getElementById("result").innerText =
+"日数差：" + Math.abs(days) + " 日";
+
+}
+
+</script>
+
+</body>
+
+</html>
