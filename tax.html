@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>消費税計算ツール | ARDY TOOLBASE</title>
+</head>
+
+<body>
+
+<h1>消費税計算ツール</h1>
+
+<p>金額を入力してください</p>
+
+<input type="number" id="price" placeholder="金額">
+
+<select id="taxRate">
+<option value="10">10%</option>
+<option value="8">8%</option>
+</select>
+
+<button onclick="calcTax()">計算</button>
+
+<hr>
+
+<p id="taxResult"></p>
+<p id="totalResult"></p>
+
+<script>
+
+function calcTax(){
+
+let price = document.getElementById("price").value;
+
+let rate = document.getElementById("taxRate").value;
+
+let tax = Math.floor(price * rate / 100);
+
+let total = Number(price) + tax;
+
+document.getElementById("taxResult").innerText =
+"消費税：" + tax.toLocaleString() + "円";
+
+document.getElementById("totalResult").innerText =
+"税込金額：" + total.toLocaleString() + "円";
+
+}
+
+</script>
+
+</body>
+</html>
