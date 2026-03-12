@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>西暦・和暦変換 | ARDY TOOLBASE</title>
+</head>
+
+<body>
+
+<h1>西暦 ↔ 和暦変換ツール</h1>
+
+<h2>西暦 → 和暦</h2>
+
+<input type="number" id="seireki" placeholder="西暦を入力">
+<button onclick="toWareki()">変換</button>
+
+<p id="warekiResult"></p>
+
+<hr>
+
+<h2>和暦 → 西暦</h2>
+
+<select id="era">
+<option value="reiwa">令和</option>
+<option value="heisei">平成</option>
+<option value="showa">昭和</option>
+</select>
+
+<input type="number" id="warekiYear" placeholder="年">
+
+<button onclick="toSeireki()">変換</button>
+
+<p id="seirekiResult"></p>
+
+<script>
+
+function toWareki(){
+
+let year = document.getElementById("seireki").value;
+
+let result="";
+
+if(year >= 2019){
+
+result="令和"+(year-2018)+"年";
+
+}
+
+else if(year >= 1989){
+
+result="平成"+(year-1988)+"年";
+
+}
+
+else if(year >= 1926){
+
+result="昭和"+(year-1925)+"年";
+
+}
+
+else{
+
+result="昭和以前";
+
+}
+
+document.getElementById("warekiResult").innerText=result;
+
+}
+
+function toSeireki(){
+
+let era=document.getElementById("era").value;
+
+let year=document.getElementById("warekiYear").value;
+
+let result=0;
+
+if(era==="reiwa"){
+
+result=2018+Number(year);
+
+}
+
+if(era==="heisei"){
+
+result=1988+Number(year);
+
+}
+
+if(era==="showa"){
+
+result=1925+Number(year);
+
+}
+
+document.getElementById("seirekiResult").innerText=result+"年";
+
+}
+
+</script>
+
+</body>
+
+</html>
