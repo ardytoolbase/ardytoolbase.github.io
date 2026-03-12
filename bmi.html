@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>BMI計算 | ARDY TOOLBASE</title>
+</head>
+
+<body>
+
+<h1>BMI計算ツール</h1>
+
+<p>身長と体重を入力してください</p>
+
+身長（cm）：
+<input type="number" id="height">
+
+体重（kg）：
+<input type="number" id="weight">
+
+<button onclick="calcBMI()">計算</button>
+
+<p id="result"></p>
+<p id="type"></p>
+
+<script>
+
+function calcBMI(){
+
+let height = document.getElementById("height").value / 100;
+let weight = document.getElementById("weight").value;
+
+let bmi = weight / (height * height);
+
+let bmiRounded = bmi.toFixed(1);
+
+document.getElementById("result").innerText =
+"BMI：" + bmiRounded;
+
+let type = "";
+
+if(bmi < 18.5){
+
+type = "低体重";
+
+}else if(bmi < 25){
+
+type = "普通体重";
+
+}else if(bmi < 30){
+
+type = "肥満（1度）";
+
+}else{
+
+type = "肥満（2度以上）";
+
+}
+
+document.getElementById("type").innerText =
+"判定：" + type;
+
+}
+
+</script>
+
+</body>
+
+</html>
