@@ -1,123 +1,153 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ARDY TOOLBASE</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f7f7f7;
-      color: #333;
-    }
 
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
+<title>ARDY TOOLBASE | 無料便利ツール</title>
 
-    header h1 {
-      margin: 0;
-      font-size: 32px;
-      letter-spacing: 1px;
-    }
+<style>
 
-    header p {
-      margin-top: 10px;
-      color: #666;
-      font-size: 15px;
-    }
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#f6f7f9;
+color:#333;
+}
 
-    .tools {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
+.container{
+max-width:900px;
+margin:auto;
+padding:40px 20px;
+}
 
-    .card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 20px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-      text-decoration: none;
-      color: #333;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
+header{
+text-align:center;
+margin-bottom:40px;
+}
 
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
-    }
+header h1{
+font-size:34px;
+margin:0;
+}
 
-    .card h2 {
-      margin: 0 0 10px;
-      font-size: 18px;
-    }
+header p{
+color:#666;
+margin-top:10px;
+}
 
-    .card p {
-      margin: 0;
-      font-size: 14px;
-      color: #666;
-      line-height: 1.6;
-    }
+.tools{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:20px;
+}
 
-    footer {
-      text-align: center;
-      margin-top: 50px;
-      font-size: 13px;
-      color: #888;
-    }
-  </style>
+.card{
+
+background:#fff;
+padding:22px;
+border-radius:12px;
+text-decoration:none;
+color:#333;
+
+box-shadow:0 4px 14px rgba(0,0,0,0.06);
+
+transition:all 0.2s ease;
+
+}
+
+.card:hover{
+
+transform:translateY(-3px);
+box-shadow:0 8px 20px rgba(0,0,0,0.1);
+
+}
+
+.card h2{
+
+margin:0 0 10px;
+font-size:18px;
+
+}
+
+.card p{
+
+margin:0;
+font-size:14px;
+color:#666;
+line-height:1.6;
+
+}
+
+footer{
+
+text-align:center;
+margin-top:50px;
+font-size:13px;
+color:#999;
+
+}
+
+</style>
+
 </head>
+
 <body>
-  <div class="container">
-    <header>
-      <h1>ARDY TOOLBASE</h1>
-      <p>シンプルで使いやすい無料便利ツール集</p>
-    </header>
 
-    <section class="tools">
-      <a href="age.html" class="card">
-        <h2>年齢計算</h2>
-        <p>西暦・和暦対応。干支や次の誕生日までの日数も確認できます。</p>
-      </a>
+<div class="container">
 
-      <a href="tax.html" class="card">
-        <h2>消費税計算</h2>
-        <p>税抜金額から消費税と税込金額を簡単に計算できます。</p>
-      </a>
+<header>
 
-      <a href="count.html" class="card">
-        <h2>文字数カウント</h2>
-        <p>入力した文章の文字数をすぐに確認できます。</p>
-      </a>
+<h1>ARDY TOOLBASE</h1>
 
-      <a href="days.html" class="card">
-        <h2>日数計算</h2>
-        <p>2つの日付の差を日数で調べられます。</p>
-      </a>
+<p>シンプルで使いやすい無料便利ツール</p>
 
-      <a href="wareki.html" class="card">
-        <h2>西暦・和暦変換</h2>
-        <p>西暦から和暦、和暦から西暦へ簡単に変換できます。</p>
-      </a>
+</header>
 
-      <a href="bmi.html" class="card">
-        <h2>BMI計算</h2>
-        <p>身長と体重からBMIを計算し、判定も表示します。</p>
-      </a>
-    </section>
+<section class="tools">
 
-    <footer>
-      © ARDY TOOLBASE
-    </footer>
-  </div>
+<a href="age.html" class="card">
+<h2>年齢計算</h2>
+<p>西暦・和暦対応。干支や次の誕生日までの日数を確認できます。</p>
+</a>
+
+<a href="tax.html" class="card">
+<h2>消費税計算</h2>
+<p>税抜価格から消費税と税込金額を簡単に計算できます。</p>
+</a>
+
+<a href="count.html" class="card">
+<h2>文字数カウント</h2>
+<p>文章の文字数をリアルタイムでカウントします。</p>
+</a>
+
+<a href="days.html" class="card">
+<h2>日数計算</h2>
+<p>2つの日付の差を日数で計算できます。</p>
+</a>
+
+<a href="wareki.html" class="card">
+<h2>西暦・和暦変換</h2>
+<p>西暦から和暦、和暦から西暦へ変換できます。</p>
+</a>
+
+<a href="bmi.html" class="card">
+<h2>BMI計算</h2>
+<p>身長と体重からBMIを計算します。</p>
+</a>
+
+</section>
+
+<footer>
+
+© ARDY TOOLBASE
+
+</footer>
+
+</div>
+
 </body>
+
 </html>
