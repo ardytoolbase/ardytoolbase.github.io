@@ -1,97 +1,164 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>ARDY TOOLBASE | 無料便利ツール</title>
 
 <style>
-
-body{
-margin:0;
-font-family:Arial, Helvetica, sans-serif;
-background:#f6f7f9;
-color:#333;
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f6f7f9;
+    color: #333;
 }
 
-.container{
-max-width:900px;
-margin:auto;
-padding:40px 20px;
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px 20px;
 }
 
-header{
-text-align:center;
-margin-bottom:40px;
+header {
+    text-align: center;
+    margin-bottom: 40px;
 }
 
-header h1{
-font-size:34px;
-margin:0;
+header h1 {
+    font-size: 34px;
+    margin: 0;
 }
 
-header p{
-color:#666;
-margin-top:10px;
+header p {
+    color: #666;
+    margin-top: 10px;
 }
 
-.tools{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:20px;
+/* --- 追加：アフィリエイトバナーのスタイル --- */
+.affiliate-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(239, 68, 68, 0.05) 100%);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    border-left: 4px solid #f59e0b;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 40px;
+    text-decoration: none;
+    transition: all 0.2s ease;
 }
 
-.card{
-
-background:#fff;
-padding:22px;
-border-radius:12px;
-text-decoration:none;
-color:#333;
-
-box-shadow:0 4px 14px rgba(0,0,0,0.06);
-
-transition:all 0.2s ease;
-
+.affiliate-banner:hover {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(239, 68, 68, 0.1) 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(245, 158, 11, 0.15);
 }
 
-.card:hover{
-
-transform:translateY(-3px);
-box-shadow:0 8px 20px rgba(0,0,0,0.1);
-
+.banner-content {
+    flex: 1;
 }
 
-.card h2{
-
-margin:0 0 10px;
-font-size:18px;
-
+.banner-badge {
+    display: inline-block;
+    background: #f59e0b;
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
 }
 
-.card p{
-
-margin:0;
-font-size:14px;
-color:#666;
-line-height:1.6;
-
+.banner-title {
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 6px 0;
 }
 
-footer{
+.banner-desc {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+    line-height: 1.5;
+}
 
-text-align:center;
-margin-top:50px;
-font-size:13px;
-color:#999;
+.banner-action {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    color: #f59e0b;
+    border: 1px solid #f59e0b;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
 
+.affiliate-banner:hover .banner-action {
+    background: #f59e0b;
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+    .affiliate-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    .banner-action {
+        width: 100%;
+        justify-content: center;
+    }
+}
+/* ------------------------------------------- */
+
+.tools {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #fff;
+    padding: 22px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+    margin: 0 0 10px;
+    font-size: 18px;
+}
+
+.card p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+}
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 13px;
+    color: #999;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -99,55 +166,55 @@ color:#999;
 <div class="container">
 
 <header>
-
-<h1>ARDY TOOLBASE</h1>
-
-<p>シンプルで使いやすい無料便利ツール</p>
-
+    <h1>ARDY TOOLBASE</h1>
+    <p>シンプルで使いやすい無料便利ツール</p>
 </header>
 
+<!-- 💎 追加：アフィリエイトバナー -->
+<a href="https://brain-market.com/u/ikehaya/a/bzMjMyMjMgoTZsNWa0JXY?from=bzADM1QzMgojclNXd" target="_blank" rel="noopener noreferrer" class="affiliate-banner">
+    <div class="banner-content">
+        <span class="banner-badge">おすすめビジネス書</span>
+        <h3 class="banner-title">【明鏡】マーケティングで"売れる仕組み"を作る</h3>
+        <p class="banner-desc">EC運営や副業に行き詰まったら読むべき本質。小手先ではない、あなたの商品が劇的に売れるようになるための思考法。</p>
+    </div>
+    <div class="banner-action">
+        <span>詳細を見る</span>
+        <span>➔</span>
+    </div>
+</a>
+
 <section class="tools">
-
-<a href="age.html" class="card">
-<h2>年齢計算</h2>
-<p>西暦・和暦対応。干支や次の誕生日までの日数を確認できます。</p>
-</a>
-
-<a href="tax.html" class="card">
-<h2>消費税計算</h2>
-<p>税抜価格から消費税と税込金額を簡単に計算できます。</p>
-</a>
-
-<a href="count.html" class="card">
-<h2>文字数カウント</h2>
-<p>文章の文字数をリアルタイムでカウントします。</p>
-</a>
-
-<a href="days.html" class="card">
-<h2>日数計算</h2>
-<p>2つの日付の差を日数で計算できます。</p>
-</a>
-
-<a href="wareki.html" class="card">
-<h2>西暦・和暦変換</h2>
-<p>西暦から和暦、和暦から西暦へ変換できます。</p>
-</a>
-
-<a href="bmi.html" class="card">
-<h2>BMI計算</h2>
-<p>身長と体重からBMIを計算します。</p>
-</a>
-
+    <a href="age.html" class="card">
+        <h2>年齢計算</h2>
+        <p>西暦・和暦対応。干支や次の誕生日までの日数を確認できます。</p>
+    </a>
+    <a href="tax.html" class="card">
+        <h2>消費税計算</h2>
+        <p>税抜価格から消費税と税込金額を簡単に計算できます。</p>
+    </a>
+    <a href="count.html" class="card">
+        <h2>文字数カウント</h2>
+        <p>文章の文字数をリアルタイムでカウントします。</p>
+    </a>
+    <a href="days.html" class="card">
+        <h2>日数計算</h2>
+        <p>2つの日付の差を日数で計算できます。</p>
+    </a>
+    <a href="wareki.html" class="card">
+        <h2>西暦・和暦変換</h2>
+        <p>西暦から和暦、和暦から西暦へ変換できます。</p>
+    </a>
+    <a href="bmi.html" class="card">
+        <h2>BMI計算</h2>
+        <p>身長と体重からBMIを計算します。</p>
+    </a>
 </section>
 
 <footer>
-
-© ARDY TOOLBASE
-
+    © ARDY TOOLBASE
 </footer>
 
 </div>
 
 </body>
-
 </html>
