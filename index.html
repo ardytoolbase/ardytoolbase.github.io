@@ -2,122 +2,79 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
- <meta name="google-site-verification" content="C4E0k44QOd9pXjdPDUslXqaI3xWRXOihxI5v5DQOtbA" />   
+<meta name="google-site-verification" content="C4E0k44QOd9pXjdPDUslXqaI3xWRXOihxI5v5DQOtbA">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="年齢計算、消費税計算、文字数カウントなど、日常ですぐ使える無料便利ツールをまとめたARDY TOOLBASEです。">
 <title>ARDY TOOLBASE | 無料便利ツール</title>
 
 <style>
+:root {
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --text: #273444;
+    --muted: #667085;
+    --line: #dde2e8;
+    --accent: #137a50;
+    --accent-soft: #e9f4ee;
+    --pr: #8a6b22;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background: #f6f7f9;
-    color: #333;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+a:focus-visible {
+    outline: 3px solid rgba(19, 122, 80, 0.28);
+    outline-offset: 4px;
 }
 
 .container {
+    width: calc(100% - 40px);
     max-width: 900px;
-    margin: auto;
-    padding: 40px 20px;
+    margin: 0 auto;
+    padding: 48px 0 32px;
 }
 
 header {
-    text-align: center;
     margin-bottom: 40px;
+}
+
+.brand-label {
+    margin: 0 0 10px;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0;
 }
 
 header h1 {
-    font-size: 34px;
     margin: 0;
+    font-size: clamp(30px, 6vw, 44px);
+    line-height: 1.15;
+    letter-spacing: 0;
 }
 
 header p {
-    color: #666;
-    margin-top: 10px;
+    max-width: 620px;
+    margin: 14px 0 0;
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.8;
 }
 
-/* --- 追加：アフィリエイトバナーのスタイル --- */
-.affiliate-banner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(239, 68, 68, 0.05) 100%);
-    border: 1px solid rgba(245, 158, 11, 0.3);
-    border-left: 4px solid #f59e0b;
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 40px;
-    text-decoration: none;
-    transition: all 0.2s ease;
+.section-heading {
+    margin: 0 0 18px;
+    font-size: 22px;
+    letter-spacing: 0;
 }
-
-.affiliate-banner:hover {
-    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(239, 68, 68, 0.1) 100%);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(245, 158, 11, 0.15);
-}
-
-.banner-content {
-    flex: 1;
-}
-
-.banner-badge {
-    display: inline-block;
-    background: #f59e0b;
-    color: #fff;
-    font-size: 11px;
-    font-weight: bold;
-    padding: 4px 8px;
-    border-radius: 4px;
-    margin-bottom: 8px;
-    letter-spacing: 1px;
-}
-
-.banner-title {
-    color: #333;
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0 0 6px 0;
-}
-
-.banner-desc {
-    color: #666;
-    font-size: 14px;
-    margin: 0;
-    line-height: 1.5;
-}
-
-.banner-action {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: #fff;
-    color: #f59e0b;
-    border: 1px solid #f59e0b;
-    padding: 10px 20px;
-    border-radius: 30px;
-    font-size: 14px;
-    font-weight: bold;
-    white-space: nowrap;
-    transition: all 0.2s ease;
-}
-
-.affiliate-banner:hover .banner-action {
-    background: #f59e0b;
-    color: #fff;
-}
-
-@media (max-width: 600px) {
-    .affiliate-banner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-    }
-    .banner-action {
-        width: 100%;
-        justify-content: center;
-    }
-}
-/* ------------------------------------------- */
 
 .tools {
     display: grid;
@@ -126,96 +83,336 @@ header p {
 }
 
 .card {
-    background: #fff;
+    width: 100%;
+    min-width: 0;
+    min-height: 132px;
     padding: 22px;
-    border-radius: 12px;
+    background: var(--surface);
+    color: var(--text);
     text-decoration: none;
-    color: #333;
+    border: 1px solid transparent;
+    border-radius: 8px;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-    transition: all 0.2s ease;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-color: #c7d9ce;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.09);
 }
 
 .card h2 {
     margin: 0 0 10px;
     font-size: 18px;
+    letter-spacing: 0;
 }
 
 .card p {
     margin: 0;
+    color: var(--muted);
     font-size: 14px;
-    color: #666;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+}
+
+.activities {
+    margin-top: 50px;
+    padding: 34px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.activities-intro {
+    margin: -8px 0 20px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.activity-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.activity-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 76px;
+    padding: 14px 0;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 2px solid #b7c9bd;
+}
+
+.activity-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.activity-link strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.activity-link small {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.activity-arrow {
+    flex: 0 0 auto;
+    font-size: 20px;
+}
+
+.recommendation {
+    margin-top: 40px;
+}
+
+.recommendation-label {
+    margin: 0 0 12px;
+    color: var(--pr);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.recommendation-note {
+    margin: -4px 0 16px;
+    color: var(--muted);
+    font-size: 12px;
     line-height: 1.6;
 }
 
-footer {
-    text-align: center;
-    margin-top: 50px;
-    font-size: 13px;
-    color: #999;
+.recommendation-list {
+    display: grid;
+    gap: 14px;
 }
 
+.affiliate-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 18px 20px;
+    background: var(--surface);
+    color: var(--text);
+    text-decoration: none;
+    border: 1px solid #e2e5e9;
+    border-left: 3px solid #d2aa4f;
+    border-radius: 8px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.affiliate-banner:hover {
+    border-color: #c7a14b;
+    box-shadow: 0 6px 16px rgba(47, 52, 57, 0.08);
+}
+
+.banner-content {
+    flex: 1;
+}
+
+.banner-badge {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: var(--pr);
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.banner-title {
+    margin: 0 0 6px;
+    font-size: 16px;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+}
+
+.banner-desc {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.banner-action {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto;
+    color: var(--pr);
+    font-size: 13px;
+    font-weight: bold;
+}
+
+footer {
+    margin-top: 48px;
+    text-align: center;
+    color: #8a929e;
+    font-size: 13px;
+}
+
+@media (max-width: 640px) {
+    .container {
+        width: calc(100% - 28px);
+        padding-top: 32px;
+    }
+
+    .tools {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .activity-links {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+
+    .affiliate-banner {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card,
+    .affiliate-banner {
+        transition: none;
+    }
+}
 </style>
 </head>
 
 <body>
+<main class="container">
+    <header>
+        <p class="brand-label">毎日の「ちょっと面倒」を、少しラクに。</p>
+        <h1>ARDY TOOLBASE</h1>
+        <p>登録なしですぐ使える、シンプルな無料便利ツールをまとめています。</p>
+    </header>
 
-<div class="container">
+    <section aria-labelledby="tools-title">
+        <h2 class="section-heading" id="tools-title">無料ツール</h2>
+        <div class="tools">
+            <a href="age.html" class="card">
+                <h2>年齢計算</h2>
+                <p>西暦・和暦対応。干支や次の誕生日までの日数を確認できます。</p>
+            </a>
+            <a href="tax.html" class="card">
+                <h2>消費税計算</h2>
+                <p>税抜価格から消費税と税込金額を簡単に計算できます。</p>
+            </a>
+            <a href="count.html" class="card">
+                <h2>文字数カウント</h2>
+                <p>文章の文字数をリアルタイムでカウントします。</p>
+            </a>
+            <a href="days.html" class="card">
+                <h2>日数計算</h2>
+                <p>2つの日付の差を日数で計算できます。</p>
+            </a>
+            <a href="wareki.html" class="card">
+                <h2>西暦・和暦変換</h2>
+                <p>西暦から和暦、和暦から西暦へ変換できます。</p>
+            </a>
+            <a href="bmi.html" class="card">
+                <h2>BMI計算</h2>
+                <p>身長と体重からBMIを計算します。</p>
+            </a>
+        </div>
+    </section>
 
-<header>
-    <h1>ARDY TOOLBASE</h1>
-    <p>シンプルで使いやすい無料便利ツール</p>
-</header>
+    <section class="activities" aria-labelledby="activities-title">
+        <h2 class="section-heading" id="activities-title">ARDYの活動</h2>
+        <p class="activities-intro">EC運営とAI活用を、初心者にもわかりやすい言葉でお届けしています。</p>
+        <div class="activity-links">
+            <a href="https://note.com/ardy_ai" target="_blank" rel="noopener noreferrer" class="activity-link">
+                <span>
+                    <strong>noteを読む</strong>
+                    <small>ARDY AI教室の記事一覧</small>
+                </span>
+                <span class="activity-arrow" aria-hidden="true">→</span>
+            </a>
+            <a href="https://lin.ee/yL1Zv17" target="_blank" rel="noopener noreferrer" class="activity-link">
+                <span>
+                    <strong>ARDY AI教室 公式LINE</strong>
+                    <small>無料ガイドと今後のお知らせ</small>
+                </span>
+                <span class="activity-arrow" aria-hidden="true">→</span>
+            </a>
+        </div>
+    </section>
 
-<!-- 💎 追加：アフィリエイトバナー -->
-<a href="https://brain-market.com/u/ikehaya/a/bzMjMyMjMgoTZsNWa0JXY?from=bzADM1QzMgojclNXd" target="_blank" rel="noopener noreferrer" class="affiliate-banner">
-    <div class="banner-content">
-        <span class="banner-badge">おすすめビジネス書</span>
-        <h3 class="banner-title">【明鏡】マーケティングで"売れる仕組み"を作る</h3>
-        <p class="banner-desc">EC運営や副業に行き詰まったら読むべき本質。小手先ではない、あなたの商品が劇的に売れるようになるための思考法。</p>
-    </div>
-    <div class="banner-action">
-        <span>詳細を見る</span>
-        <span>➔</span>
-    </div>
-</a>
+    <aside class="recommendation" aria-label="PR">
+        <p class="recommendation-label">PR・おすすめ</p>
+        <p class="recommendation-note">外部サイトの教材をご紹介しています。リンクにはアフィリエイト広告を含みます。</p>
+        <div class="recommendation-list">
+            <a href="https://brain-market.com/u/ikehaya/a/bzMjMyMjMgoTZsNWa0JXY?from=bzADM1QzMgojclNXd" target="_blank" rel="sponsored noopener noreferrer" class="affiliate-banner">
+                <div class="banner-content">
+                    <span class="banner-badge">おすすめビジネス書</span>
+                    <h3 class="banner-title">【明鏡】マーケティングで「売れる仕組み」を作る</h3>
+                    <p class="banner-desc">商品を届けるための考え方を学びたい方へ。</p>
+                </div>
+                <div class="banner-action">
+                    <span>詳細を見る</span>
+                    <span aria-hidden="true">→</span>
+                </div>
+            </a>
 
-<section class="tools">
-    <a href="age.html" class="card">
-        <h2>年齢計算</h2>
-        <p>西暦・和暦対応。干支や次の誕生日までの日数を確認できます。</p>
-    </a>
-    <a href="tax.html" class="card">
-        <h2>消費税計算</h2>
-        <p>税抜価格から消費税と税込金額を簡単に計算できます。</p>
-    </a>
-    <a href="count.html" class="card">
-        <h2>文字数カウント</h2>
-        <p>文章の文字数をリアルタイムでカウントします。</p>
-    </a>
-    <a href="days.html" class="card">
-        <h2>日数計算</h2>
-        <p>2つの日付の差を日数で計算できます。</p>
-    </a>
-    <a href="wareki.html" class="card">
-        <h2>西暦・和暦変換</h2>
-        <p>西暦から和暦、和暦から西暦へ変換できます。</p>
-    </a>
-    <a href="bmi.html" class="card">
-        <h2>BMI計算</h2>
-        <p>身長と体重からBMIを計算します。</p>
-    </a>
-</section>
+            <a href="https://brain-market.com/u/fujin_metaverse/a/b1ETN3QjMgoTZsNWa0JXY?from=bzADM1QzMgojclNXd" target="_blank" rel="sponsored noopener noreferrer" class="affiliate-banner">
+                <div class="banner-content">
+                    <span class="banner-badge">AIエージェント教材</span>
+                    <h3 class="banner-title">Codexアプリの教科書｜ChatGPTの次に来るAIエージェント完全攻略</h3>
+                    <p class="banner-desc">CodexアプリとAIエージェントの活用を学びたい方へ。</p>
+                </div>
+                <div class="banner-action">
+                    <span>詳細を見る</span>
+                    <span aria-hidden="true">→</span>
+                </div>
+            </a>
 
-<footer>
-    © ARDY TOOLBASE
-</footer>
+            <a href="https://brain-market.com/u/shupeiman/a/b5EzN2QjMgoTZsNWa0JXY?from=bzADM1QzMgojclNXd" target="_blank" rel="sponsored noopener noreferrer" class="affiliate-banner">
+                <div class="banner-content">
+                    <span class="banner-badge">AI活用教材</span>
+                    <h3 class="banner-title">世界一わかりやすい「AIで年収500万稼ぐ教科書」</h3>
+                    <p class="banner-desc">AIを仕事や収益化へつなげる考え方を学びたい方へ。</p>
+                </div>
+                <div class="banner-action">
+                    <span>詳細を見る</span>
+                    <span aria-hidden="true">→</span>
+                </div>
+            </a>
 
-</div>
+            <a href="https://brain-market.com/u/shupeiman/a/b1ETNyQjMgoTZsNWa0JXY?from=bzADM1QzMgojclNXd" target="_blank" rel="sponsored noopener noreferrer" class="affiliate-banner">
+                <div class="banner-content">
+                    <span class="banner-badge">AIアプリ教材</span>
+                    <h3 class="banner-title">世界一わかりやすい「Claudeアプリの教科書」</h3>
+                    <p class="banner-desc">Claudeアプリの基本と活用方法を学びたい方へ。</p>
+                </div>
+                <div class="banner-action">
+                    <span>詳細を見る</span>
+                    <span aria-hidden="true">→</span>
+                </div>
+            </a>
 
+            <a href="https://brain-market.com/u/notan/a/byETO3MjMgoTZsNWa0JXY?from=bzADM1QzMgojclNXd" target="_blank" rel="sponsored noopener noreferrer" class="affiliate-banner">
+                <div class="banner-content">
+                    <span class="banner-badge">AIツール教材</span>
+                    <h3 class="banner-title">Antigravityの教科書</h3>
+                    <p class="banner-desc">Antigravityの使い方を学びたい方へ。</p>
+                </div>
+                <div class="banner-action">
+                    <span>詳細を見る</span>
+                    <span aria-hidden="true">→</span>
+                </div>
+            </a>
+        </div>
+    </aside>
+
+    <footer>© ARDY TOOLBASE</footer>
+</main>
 </body>
 </html>
